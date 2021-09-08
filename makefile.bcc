@@ -1,0 +1,19 @@
+# Makefile for Borland C++ 3.1 for DOS
+
+CC=bcc
+COPTS=-ml -w -O2
+CDEFS=-DUSECORELEFT 
+BIN=gator.exe
+
+.c.obj:
+	$(CC) $(COPTS) $(CDEFS) -c $<
+
+OBJS=ctlparse.obj dbrlog.obj dlist.obj fdlog.obj gator.obj getopts.obj \
+  gtrcfg.obj gtrcmd.obj gtrhlp.obj gtrlog.obj gtrutil.obj opuslog.obj \
+  slist.obj statlog.obj gtrpkt.obj gtrfido.obj stristr.obj prseaddr.obj \
+  gtrdmn.obj gtrmask.obj gtrgate.obj gtrpmsg.obj dtsplit.obj msgtxt.obj \
+  dtfido.obj
+
+$(BIN): $(OBJS)
+	del coreleft.obj
+	$(CC) $(COPTS) -e$(BIN) *.obj
