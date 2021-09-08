@@ -1,0 +1,22 @@
+# Makefile for Microsoft QuickC 2.5 for DOS
+
+CC=qcl
+COPTS=-AL -W4 -Ox
+CDEF=-DUSECORELEFT
+#LOPTS=/exep
+BIN=gator.exe
+
+.c.obj:
+	$(CC) $(COPTS) $(CDEFS) -c $<
+
+OBJS=coreleft.obj ctlparse.obj dbrlog.obj dlist.obj fdlog.obj
+  gator.obj getopts.obj gtrcfg.obj gtrcmd.obj gtrhlp.obj \
+  gtrlog.obj gtrutil.obj opuslog.obj slist.obj statlog.obj \
+  gtrpkt.obj gtrfido.obj stristr.obj prseaddr.obj gtrdmn.obj \
+  gtrmask.obj gtrgate.obj gtrpmsg.obj dtsplit.obj msgtxt.obj \
+  dtfido.obj
+
+all: $(BIN)
+
+$(BIN): $(OBJS)
+	$(CC) $(COPTS) -F 1000 -Fe$(BIN) *.obj -link $(LOPTS)
